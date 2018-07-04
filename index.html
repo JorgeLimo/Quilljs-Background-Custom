@@ -12,8 +12,6 @@
 <div id="editor">
   <p>Hello World!</p>
   <p>Some initial <strong>bold</strong> text</p>
-  <a class="button" href="#loadBackgroundImageContent">Cargar Imagenes</a>
-  <a class="button" href="#loadBackgroundColoresContent">Cargar Colores</a>
   <p><br></p>
 </div>
 
@@ -22,6 +20,13 @@
 	<div class="popup">
 		<h2>Create Image Background</h2>
 		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<h4 style="text-align: center;">Choose file image you prefer.</h4>
+			<center>
+				<input type="file" id="imgSelectedPopUp" name="imgSelectedPopUp"  accept="image/x-png,image/gif,image/jpeg"><br><br><br>
+				<button id="colorSelectedPopUpButton" class="btn btn-primary" onclick="imgSelectedPopUpGo()">Select image</button>
+			</center>
+		</div>
 	</div>
 </div>
 
@@ -35,9 +40,7 @@
 				<input type="color" id="colorSelectedPopUp" name="colorSelectedPopUp"><br><br>
 				<button id="colorSelectedPopUpButton" class="btn btn-primary" onclick="colorSelectedPopUpGo()">Select Color</button>
 			</center>
-
 		</div>
-
 	</div>
 </div>
 <br><br>

@@ -46,15 +46,39 @@ var quill = new Quill('#editor', {
     window.location.href="#loadBackgroundColoresContent";
   }
 
+  function imgSelectedPopUpGo(){
+    document.querySelector("#editor .ql-editor").style.backgroundColor  = "";
+    var file = document.querySelector('#imgSelectedPopUp').files[0];
+    var imageBase64data = loadBackgrodunBase64(file);
+    console.log(imageBase64data);
+    window.location.href="#";
+  }
 
   function colorSelectedPopUpGo(){
+
+    var element = document.querySelector("#editor .ql-editor");
+    element.classList.remove("our-background-image");
+    element.style.backgroundImage = "";
     var colorSelected = document.querySelector('#colorSelectedPopUp').value; 
     document.querySelector("#editor .ql-editor").style.backgroundColor  = colorSelected;
     window.location.href="#";
   }
 
-
   function LoadDataCreatedContent(){
-      document.querySelector('#datageneratenow').innerHTML = document.querySelector("#editor .ql-editor").innerHTML;
+      document.querySelector('#datageneratenow').innerHTML = document.querySelector("#editor").innerHTML;
       window.location.href="#LoadDataCreated";
   }
+
+  function loadBackgrodunBase64(file) {
+   var reader = new FileReader();
+   reader.readAsDataURL(file);
+   reader.onload = function () {
+     //console.log(reader.result);
+     var element = document.querySelector("#editor .ql-editor");
+     element.classList.add("our-background-image");
+     element.style.backgroundImage = "url('"+reader.result+"')";
+   };
+   reader.onerror = function (error) {
+     console.log('Error: ', error);
+   };
+}
