@@ -18,7 +18,8 @@ var quill = new Quill('#editor', {
     		  [{ 'font': [] }],
     		  [{ 'align': [] }],
     		  ['clean'],                                   
-          [{ 'fondos': ['Imagen', 'Colores'] }]
+          [{ 'fondos': ['Imagen', 'Colores'] }],      
+          [{ 'mover': ['Titulo'] }]       
         ],
         handlers: {
             "fondos": function (value) { 
@@ -27,6 +28,9 @@ var quill = new Quill('#editor', {
                 }else{
                 	loadBackgroundColores();
                 }
+            },
+            "mover": function (value) { 
+                createidDataDrag();
             }
         }
       }
@@ -37,6 +41,12 @@ var quill = new Quill('#editor', {
   const fondosPickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-fondos .ql-picker-item'));
   fondosPickerItems.forEach(item => item.textContent = item.dataset.value);
   document.querySelector('.ql-fondos .ql-picker-label').innerHTML = 'Fondos&nbsp;&nbsp;&nbsp;&nbsp;' + document.querySelector('.ql-fondos .ql-picker-label').innerHTML;
+  
+  const moverPickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-mover .ql-picker-item'));
+  moverPickerItems.forEach(item => item.textContent = item.dataset.value);
+  document.querySelector('.ql-mover .ql-picker-label').innerHTML = 'Mover&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + document.querySelector('.ql-mover .ql-picker-label').innerHTML;
+  
+
 
   function loadBackgroundImage(){
     window.location.href="#loadBackgroundImageContent";
@@ -81,4 +91,35 @@ var quill = new Quill('#editor', {
    reader.onerror = function (error) {
      console.log('Error: ', error);
    };
+}
+
+  function createidDataDrag(){
+
+    /**var widthNOW = $("#editor").width();**/
+    $('.ql-editor h1:first').css("width",400);
+    $('.ql-editor h1:first').draggabilly({
+      containment: true
+    });
+  }
+
+
+function checkPosition()
+{
+    if($(window).width() < 767)
+    {
+      $('.ql-editor h1:first').css("position","");
+      $('.ql-editor h1:first').css("width","auto");
+    }
+}
+
+
+/** optionald **/
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+        text = document.selection.createRange().text;
+    }
+    return text;
 }
